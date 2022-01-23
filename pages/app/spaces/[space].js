@@ -8,6 +8,7 @@ import {
 } from "firebase/firestore";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuth } from "../../../contexts/auth";
+import { AudioPlayer } from "../../../components/AudioPlayer";
 
 export default function AppSpacePage(props) {
   const router = useRouter();
@@ -63,6 +64,11 @@ export default function AppSpacePage(props) {
             className="px-2 py-0.5 border border-gray-600"
           />
         </label>
+
+        <AudioPlayer
+          src={`https://stream.mux.com/${space.playbackId}.m3u8?add_audio_only=true`}
+          poster={`https://image.mux.com/${space.playbackId}/thumbnail.png`}
+        />
         <button type="submit" className="border border-gray-600">
           Save
         </button>

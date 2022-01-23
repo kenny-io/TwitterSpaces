@@ -7,6 +7,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { useAuth } from "../../../contexts/auth";
+import { Upload } from "../../../components/Upload";
 
 export default function NewSpacePage() {
   const router = useRouter();
@@ -19,6 +20,8 @@ export default function NewSpacePage() {
       uid: user.uid,
       title: e.currentTarget.title.value,
       description: e.currentTarget.description.value,
+      assetId: e.currentTarget.assetId.value,
+      playbackId: e.currentTarget.playbackId.value,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     });
@@ -47,6 +50,7 @@ export default function NewSpacePage() {
             className="px-2 py-0.5 border border-gray-600"
           />
         </label>
+        <Upload />
         <button type="submit" className="border border-gray-600">
           Create
         </button>
