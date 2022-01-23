@@ -1,6 +1,10 @@
-import { FieldValue } from "firebase-admin/firestore";
-import { auth, firestore } from "../../lib/firebase.server";
+import "../../lib/firebase.server";
+import { getFirestore, FieldValue } from "firebase-admin/firestore";
+import { getAuth } from "firebase-admin/auth";
 import { createClient, getUser, getAvatar } from "../../lib/twitter.server";
+
+const firestore = getFirestore();
+const auth = getAuth();
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
