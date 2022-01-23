@@ -4,5 +4,31 @@ service cloud.firestore {
     match /tests/{document=**} {
       allow read;
     }
+
+    match /users/{userId} {
+      allow read;
+    }
+
+    match /users/{userId}/spaces/{spaceId} {
+      allow read;
+      allow create: if canCreateSpace(userId); 
+      allow update: if canUpdateSpace(userId);
+      allow delete: if request.auth.uid == userId;
+    }
+
+    // Spaces
+    
+    function canCreateSpace(userId) {
+      let isOwner = request.auth.uid == userId;
+      let isNow = request.time == request.resource.data.createdAt;
+      return isOwner && isNow;
+    }
+    
+    function canUpdateSpace(userId) {
+      let isOwner = request.auth.uid == userId;
+      let isNow = request.time == request.resource.data.updatedAt;
+      let doesNotUpdateForbidden = !request.resource.data.diff(resource.data).affectedKeys().hasAny(['uid']);
+      return isOwner && isNow && doesNotUpdateForbidden;
+    }
   }
 }
