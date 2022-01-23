@@ -9,3 +9,16 @@ body {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Game of Squids";
+  src: url("../public/fonts/GameOfSquids.ttf");
+}
+/* @font-face {
+  font-family: "Mulish";
+  src: url("../public/fonts/mulish.ttf");
+  font-size: 57px;
+  font-weight: 800;
+  line-height: 72px;
+  font-style: normal;
+} */
