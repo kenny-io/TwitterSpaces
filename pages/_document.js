@@ -14,10 +14,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap"
             rel="stylesheet"
           />
-          {/* <link
-            href="https://fonts.googleapis.com/css2?family=Mulish&display=swap"
-            rel="stylesheet"
-          /> */}
+
           <link
             href="https://fonts.googleapis.com/css2?family=Mulish:wght@800&display=swap"
             rel="stylesheet"
