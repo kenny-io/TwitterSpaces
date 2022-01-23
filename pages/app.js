@@ -4,7 +4,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { useAuth } from "../contexts/auth";
 
 export default function AppPage() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [spacesSnap, isLoading] = useCollection(
     collection(getFirestore(), `users/${user?.uid}/spaces`)
   );
@@ -50,7 +50,8 @@ export default function AppPage() {
           );
         })}
       </ul>
-      <Link href="/app/spaces/new">New</Link>
+      <Link href="/app/spaces/new">New</Link> <br />
+      <button onClick={logout}>Logout</button>
     </div>
   );
 }

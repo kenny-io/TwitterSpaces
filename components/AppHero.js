@@ -3,15 +3,15 @@ export default function AppHero() {
     <section className="">
       <div className="container px-5 py-24 mx-auto ">
         <div className="flex flex-col text-center mb-20">
-          <h1 className="sm:text-4xl mb-8 text-gray-900 font-mulish">
-            Never miss that interesting Twitter{" "}
-            <span className="text-twitterblue">Spaces </span> <br />{" "}
-            conversation again!
+          <h1 className="font-mulish mb-8 text-5xl font-bold font-heading">
+            Never miss interesting Twitter{" "}
+            <span className="text-twitterblue">Space </span> <br />{" "}
+            conversations again!
           </h1>
           <p className="lg:w-2/3 mx-auto text-gray-900 font-grotesk leading-relaxed">
-            Do you have favorite Twitter Spaces hosts? Now they can uplaod{" "}
-            <br /> their recorded space conversations here for you to
-            <br /> catch up on, and listen at your own time.
+            Do you have favorite Twitter Spaces hosts? Now they can uplaod their
+            recorded space <br /> conversations here for you to catch up on.
+            Listen at your own time.
           </p>
         </div>
         <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
