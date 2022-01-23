@@ -1,13 +1,8 @@
 import { async } from "@firebase/util";
 import { useAuth } from "../contexts/auth";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 export default function LoginPage() {
   const { user, login, logout } = useAuth();
-
-  const router = useRouter();
-
   return (
     <div>
       {user ? (
@@ -36,7 +31,6 @@ export default function LoginPage() {
                         Not to worry tho, we are not doing the lengthy email and
                         password thingy.
                       </span>
-                      {/* <span className="text-white">the lazy dog.</span> */}
                     </p>
                   </div>
                 </div>

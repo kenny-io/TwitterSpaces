@@ -18,8 +18,8 @@ export default function AppHero() {
           <div className="relative flex-grow w-full">
             <input
               type="text"
-              id="full-name"
-              name="full-name"
+              id="space-search"
+              name="space-search"
               placeholder="Search for a space"
               className="w-full bg-gray-100 bg-opacity-50 rounded-full border border-gray-300 focus:border-twitterblue focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
             />

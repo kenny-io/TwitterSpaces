@@ -40,7 +40,7 @@ export default function SpacesList() {
     },
   ];
   return (
-    <section className="text-white">
+    <section className="text-white mb-40">
       <div className="px-5 mx-auto">
         <div className="flex flex-wrap -m-4">
           {allSpaces.map((space, i) => (
