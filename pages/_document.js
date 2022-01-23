@@ -11,10 +11,6 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link
-            href="https://fonts.googleapis.com/css2?family=Nunito"
-            rel="stylesheet"
-          />
-          <link
             href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap"
             rel="stylesheet"
           />
