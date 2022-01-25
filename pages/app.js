@@ -81,7 +81,7 @@ export default function AppPage() {
             @kenny_io
             {/* {user?.username}  */}
           </h2>
-          <p class="mb-8 leading-relaxed font-grotesk">
+          <p className="mb-8 leading-relaxed font-grotesk">
             Snr. DX at @Netlify. Always open to chat about #Jamstack, #VueJS
             #Nuxtjs and #Frontend things. http://kenny.engineer
           </p>
