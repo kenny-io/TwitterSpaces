@@ -32,7 +32,7 @@ export default function AppPage() {
               @kenny_io
               {/* {user?.username}  */}
             </h2>
-            <p class="mb-8 leading-relaxed font-grotesk">
+            <p className="mb-8 leading-relaxed font-grotesk">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud

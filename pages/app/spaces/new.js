@@ -29,44 +29,44 @@ export default function NewSpacePage() {
   }
 
   return (
-    <section class="relative py-20 2xl:py-40 bg-gray-800 overflow-hidden">
-      <div class="relative container px-4 mx-auto">
-        <div class="max-w-5xl mx-auto">
-          <div class="flex flex-wrap items-center -mx-4">
-            <div class="w-full lg:w-1/2 px-4 mb-16 lg:mb-0">
-              <div class="max-w-md">
-                <h2 class="mt-8 mb-12 text-5xl font-bold font-heading text-white font-mulish">
+    <section className="relative py-20 2xl:py-40 bg-gray-800 overflow-hidden">
+      <div className="relative container px-4 mx-auto">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-wrap items-center -mx-4">
+            <div className="w-full lg:w-1/2 px-4 mb-16 lg:mb-0">
+              <div className="max-w-md">
+                <h2 className="mt-8 mb-12 text-5xl font-bold font-heading text-white font-mulish">
                   The journey to sharing your space conversations with the world
                   starts here
                 </h2>
               </div>
             </div>
-            <div class="w-full lg:w-1/2 px-4">
-              <div class="px-6 lg:px-20 py-12 lg:py-24 bg-gray-600 rounded-lg">
+            <div className="w-full lg:w-1/2 px-4">
+              <div className="px-6 lg:px-20 py-12 lg:py-24 bg-gray-600 rounded-lg">
                 <form onSubmit={handleSubmit} className="font-grotesk">
-                  <h3 class="mb-10 text-2xl text-white font-bold font-heading">
+                  <h3 className="mb-10 text-2xl text-white font-bold font-heading">
                     Create a new space
                   </h3>
-                  <div class="flex items-center pl-6 mb-3 bg-white rounded-full">
-                    <span class="inline-block pr-3 py-2 border-r border-gray-50"></span>
+                  <div className="flex items-center pl-6 mb-3 bg-white rounded-full">
+                    <span className="inline-block pr-3 py-2 border-r border-gray-50"></span>
                     <input
-                      class="w-full pl-4 pr-6 py-4 font-bold placeholder-gray-400 rounded-r-full focus:outline-none"
+                      className="w-full pl-4 pr-6 py-4 font-bold placeholder-gray-400 rounded-r-full focus:outline-none"
                       type="text"
                       name="title"
                       placeholder="The title of your space"
                     />
                   </div>
-                  <div class="flex items-center pl-6 mb-3 bg-white rounded-full">
-                    <span class="inline-block pr-3 py-2 border-r border-gray-50"></span>
+                  <div className="flex items-center pl-6 mb-3 bg-white rounded-full">
+                    <span className="inline-block pr-3 py-2 border-r border-gray-50"></span>
                     <input
-                      class="w-full pl-4 pr-6 py-4 font-bold placeholder-gray-400 rounded-r-full focus:outline-none"
+                      className="w-full pl-4 pr-6 py-4 font-bold placeholder-gray-400 rounded-r-full focus:outline-none"
                       type="text"
                       name="description"
                       placeholder="Describe your space"
                     />
                   </div>
 
-                  <div class="flex items-center pl-6 mb-6 bg-white rounded-full">
+                  <div className="flex items-center pl-6 mb-6 bg-white rounded-full">
                     <Upload />
                   </div>
                   <button
