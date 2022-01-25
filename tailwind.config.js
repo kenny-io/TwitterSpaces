@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         twitterblue: "#00ACEE",
         twitterblue_light: "#00acee1a",
+        twitterblue_dark: "#009ad5",
       },
     },
   },

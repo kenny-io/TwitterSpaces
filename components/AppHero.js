@@ -10,21 +10,11 @@ export default function AppHero() {
           </h1>
           <p className="lg:w-2/3 mx-auto text-gray-900 font-grotesk leading-relaxed">
             Do you have favorite Twitter Spaces hosts? Now they can upload their
-            recorded space <br /> conversations here for you to catch up on.
-            Listen at your own time.
+            recorded space conversations here for you to catch up on. Listen at
+            your own time.
           </p>
         </div>
         <div className="flex flex-col sm:flex-row lg:w-2/3 w-full mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-          {/* <div className="relative flex-grow w-full">
-            <input
-              type="text"
-              id="space-search"
-              name="space-search"
-              placeholder="Search for a space"
-              className="w-full bg-gray-100 bg-opacity-50 rounded-full border border-gray-300 focus:border-twitterblue focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
-            
-          </div> */}
           <div className="inline-flex w-full rounded border border-gray-300">
             <input
               ype="text"
@@ -52,7 +42,6 @@ export default function AppHero() {
           </div>
         </div>
         <div>
-          {/* <!-- create the half circle on the left side of the page  --> */}
           <div
             className="absolute top-24 -left-80  bg-twitterblue_light rounded-full  h-24 w-24"
             style={{ height: "550px", width: "550px" }}
