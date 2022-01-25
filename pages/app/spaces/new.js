@@ -71,7 +71,7 @@ export default function NewSpacePage() {
                   </div>
                   <button
                     type="submit"
-                    class="py-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full transition duration-200"
+                    className="py-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full transition duration-200"
                   >
                     Create
                   </button>
