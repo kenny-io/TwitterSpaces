@@ -8,11 +8,12 @@ module.exports = {
       fontFamily: {
         squid: ['"Game of Squids"', "sans-serif"],
         mulish: ["Mulish", "sans-serif"],
-        grotesk: ["Space Grotesk", "sans-serif"],
+        grotesk: ['"Space Grotesk"', "sans-serif"],
       },
       colors: {
         twitterblue: "#00ACEE",
         twitterblue_light: "#00acee1a",
+        twitterblue_dark: "#009ad5",
       },
     },
   },

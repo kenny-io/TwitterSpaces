@@ -88,7 +88,7 @@ export function Upload() {
         })}
       >
         <label>
-          Drag and drop Twitter Space file
+          Click or drop file here
           <input {...getInputProps()} />
         </label>
       </div>
