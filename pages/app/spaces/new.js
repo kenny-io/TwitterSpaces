@@ -69,6 +69,15 @@ export default function NewSpacePage() {
                       placeholder="Describe your space"
                     />
                   </div>
+                  <div className="flex items-center pl-6 mb-3 bg-white rounded-lg">
+                    <span className="inline-block pr-3 py-2 "></span>
+                    <input
+                      className="w-full pl-4 pr-6 py-4 font-semi-bold placeholder-gray-400  focus:outline-none"
+                      type="text"
+                      name="image"
+                      placeholder="Image URL for your poster"
+                    />
+                  </div>
 
                   <div className="flex items-center pl-6 mb-6 bg-gray-200 rounded-lg">
                     <Upload />
