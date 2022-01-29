@@ -84,7 +84,7 @@ export function Upload() {
     <>
       <div
         {...getRootProps({
-          className: "p-4 border border-dashed border-gray-600",
+          className: "p-4 ",
         })}
       >
         <label>
