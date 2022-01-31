@@ -2,7 +2,7 @@ import { createTwitterPhotoUrl } from "../utils/createTwitterPhotoUrl";
 
 export function HostHeader({ host, children }) {
   return (
-    <div className="container flex flex-col items-center px-5 py-24 mx-auto md:flex-row">
+    <section className="container flex flex-col items-center px-5 py-24 mx-auto md:flex-row">
       <div className="flex flex-col items-center mb-16 text-center lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0">
         <h1 className="mb-4 text-3xl font-medium text-gray-900 title-font sm:text-4xl font-mulish">
           {host.name}
@@ -24,6 +24,6 @@ export function HostHeader({ host, children }) {
           height="305px"
         />
       </div>
-    </div>
+    </section>
   );
 }
