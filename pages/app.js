@@ -1,15 +1,20 @@
 import { getFirestore, collection, doc, deleteDoc } from "firebase/firestore";
 import Link from "next/link";
-import { useCollection } from "react-firebase-hooks/firestore";
+import { useCollection, useDocumentData } from "react-firebase-hooks/firestore";
 import { useAuth } from "../contexts/auth";
 import SpacesList from "../components/SpacesList";
 
 export default function AppPage() {
-  const { user, logout } = useAuth();
-  const [spacesSnap, isLoading] = useCollection(
+  const { user } = useAuth();
+  const firestore = getFirestore();
+  const [userData, isUserLoading] = useDocumentData(
+    doc(firestore, `users/${user?.uid}`)
+  );
+  const [spacesSnap, isSpacesLoading] = useCollection(
     collection(getFirestore(), `users/${user?.uid}/spaces`)
   );
-  if (isLoading) return <div className="max-w-md mx-auto">Loading...</div>;
+  if (isUserLoading || isSpacesLoading || !userData)
+    return <div className="max-w-md mx-auto">Loading...</div>;
 
   function createPhotoUrl(TwitterPhotoUrl) {
     let URL = TwitterPhotoUrl.replace("_normal", "");
@@ -23,12 +28,12 @@ export default function AppPage() {
   if (!spacesSnap) {
     return (
       <section className="text-gray-600 body-font">
-        <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium font-mulish text-gray-900">
+        <div className="container flex flex-col items-center px-5 py-24 mx-auto md:flex-row">
+          <div className="flex flex-col items-center mb-16 text-center lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0">
+            <h1 className="mb-4 text-3xl font-medium text-gray-900 title-font sm:text-4xl font-mulish">
               {user?.displayName}
             </h1>
-            <h2 className="text-sm title-font text-gray-500 tracking-widest mb-8 font-grotesk">
+            <h2 className="mb-8 text-sm tracking-widest text-gray-500 title-font font-grotesk">
               @kenny_io
               {/* {user?.username}  */}
             </h2>
@@ -38,10 +43,7 @@ export default function AppPage() {
               enim ad minim veniam, quis nostrud
             </p>
             <Link href="/app/spaces/new">
-              <a
-                className="inline-flex items-center  bg-twitterblue border-twitterblue
-           rounded-full py-2 px-3 focus:outline-none hover:bg-twitterblue_dark text-base mt-8 md:mt-0 text-white"
-              >
+              <a className="inline-flex items-center px-3 py-2 mt-8 text-base text-white rounded-full bg-twitterblue border-twitterblue focus:outline-none hover:bg-twitterblue_dark md:mt-0">
                 Upload a new space
               </a>
             </Link>
@@ -49,11 +51,11 @@ export default function AppPage() {
               Logout
             </button> */}
           </div>
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+          <div className="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
             <img
               src={createPhotoUrl(user?.photoURL)}
               format="webp"
-              className="max-w-xs md:max-w-lg rounded-xl shadow-2xl opacity-95 hover:opacity-80 "
+              className="max-w-xs shadow-2xl md:max-w-lg rounded-xl opacity-95 hover:opacity-80 "
               sizes="sm:max-w-xs md:100vw lg:800px"
               alt="twitter profile image"
               width="305px"
@@ -61,8 +63,8 @@ export default function AppPage() {
             />
           </div>
         </div>
-        <div className="container mx-auto flex px-5 md:flex-row flex-col items-center">
-          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium font-mulish text-gray-900">
+        <div className="container flex flex-col items-center px-5 mx-auto md:flex-row">
+          <h1 className="mb-4 text-3xl font-medium text-gray-900 title-font sm:text-4xl font-mulish">
             Your spaces
           </h1>
         </div>
@@ -72,33 +74,26 @@ export default function AppPage() {
 
   return (
     <section className="text-gray-600 body-font">
-      <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-        <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium font-mulish text-gray-900">
-            {user?.displayName}
+      <div className="container flex flex-col items-center px-5 py-24 mx-auto md:flex-row">
+        <div className="flex flex-col items-center mb-16 text-center lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0">
+          <h1 className="mb-4 text-3xl font-medium text-gray-900 title-font sm:text-4xl font-mulish">
+            {userData.name}
           </h1>
-          <h2 className="text-sm title-font text-gray-500 tracking-widest mb-8 font-grotesk">
-            @kenny_io
-            {/* {user?.username}  */}
+          <h2 className="mb-8 text-sm tracking-widest text-gray-500 title-font font-grotesk">
+            @{userData.username}
           </h2>
-          <p className="mb-8 leading-relaxed font-grotesk">
-            Snr. DX at @Netlify. Always open to chat about #Jamstack, #VueJS
-            #Nuxtjs and #Frontend things. http://kenny.engineer
-          </p>
+          <p className="mb-8 leading-relaxed font-grotesk">{userData.bio}</p>
           <Link href="/app/spaces/new">
-            <a
-              className="inline-flex items-center  bg-twitterblue border-twitterblue
-           rounded-full py-2 px-3 focus:outline-none hover:bg-twitterblue_dark text-base mt-8 md:mt-0 text-white"
-            >
+            <a className="inline-flex items-center px-3 py-2 mt-8 text-base text-white rounded-full bg-twitterblue border-twitterblue focus:outline-none hover:bg-twitterblue_dark md:mt-0">
               Upload a new space
             </a>
           </Link>
         </div>
-        <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+        <div className="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
           <img
             src={createPhotoUrl(user?.photoURL)}
             format="webp"
-            className="max-w-xs md:max-w-lg rounded-xl shadow-2xl opacity-95 hover:opacity-80 "
+            className="max-w-xs shadow-2xl md:max-w-lg rounded-xl opacity-95 hover:opacity-80 "
             sizes="sm:max-w-xs md:100vw lg:800px"
             alt="twitter profile image"
             width="305px"
@@ -106,12 +101,12 @@ export default function AppPage() {
           />
         </div>
       </div>
-      <div className="container mx-auto flex px-5 md:flex-row flex-col items-center">
-        <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium font-mulish text-gray-900">
+      <div className="container items-center px-5 mx-auto">
+        <h1 className="mb-6 text-3xl font-medium text-gray-900 title-font sm:text-4xl font-mulish">
           Your spaces
         </h1>
+        <SpacesList spaces={spacesSnap.docs} deleteSpace={deleteSpace} />)
       </div>
-      <SpacesList spaces={spacesSnap.docs} deleteSpace={deleteSpace} />)
     </section>
   );
 }
