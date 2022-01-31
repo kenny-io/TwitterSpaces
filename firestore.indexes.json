@@ -1,10 +1,4 @@
 {
   "indexes": [],
-  "fieldOverrides": [
-    {
-      "collectionGroup": "spaces",
-      "fieldPath": "createdAt",
-      "indexes": [{ "queryScope": "COLLECTION_GROUP", "order": "DESCENDING" }]
-    }
-  ]
+  "fieldOverrides": []
 }

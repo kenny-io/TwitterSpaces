@@ -81,28 +81,30 @@ export function Upload() {
   if (errorMessage) return <p className="text-red-600">{errorMessage}</p>;
 
   return (
-    <div
-      {...getRootProps({
-        className: "pl-6 py-4 mb-6 bg-gray-200 rounded-lg cursor-pointer",
-      })}
-    >
-      <input {...getInputProps()} />
-      <div className="px-4">
-        {isUploading ? (
-          <>
-            {upload?.asset_id ? (
-              <p>Uploaded</p>
-            ) : (
-              <p>Uploading...{progress ? `${progress}%` : ""}</p>
-            )}
-          </>
-        ) : (
-          <p>Click or drop file here</p>
-        )}
+    <>
+      <div
+        {...getRootProps({
+          className: "p-4 ",
+        })}
+      >
+        <label>
+          Click or drop file here
+          <input {...getInputProps()} />
+        </label>
       </div>
 
       <input name="assetId" type="hidden" value={upload?.asset_id || ""} />
       <input name="playbackId" type="hidden" value={asset?.playback_id || ""} />
-    </div>
+
+      {isUploading ? (
+        <>
+          {upload?.asset_id ? (
+            <div>Uploaded</div>
+          ) : (
+            <div>Uploading...{progress ? `${progress}%` : ""}</div>
+          )}
+        </>
+      ) : null}
+    </>
   );
 }

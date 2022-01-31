@@ -4,7 +4,6 @@ import {
   getFirestore,
   doc,
   updateDoc,
-  deleteDoc,
   serverTimestamp,
 } from "firebase/firestore";
 import { useDocument } from "react-firebase-hooks/firestore";
@@ -41,15 +40,6 @@ export default function AppSpacePage(props) {
     );
   }
 
-  async function deleteSpace(id) {
-    await deleteDoc(
-      doc(getFirestore(), `users/${user.uid}/spaces/${spaceDoc.id}`)
-    );
-    router.push("/app");
-  }
-
-  if (!space) return null;
-
   return (
     <div className="max-w-md mx-auto">
       <Link href="/app">Back to app</Link>
@@ -81,13 +71,6 @@ export default function AppSpacePage(props) {
         />
         <button type="submit" className="border border-gray-600">
           Save
-        </button>
-        <button
-          type="button"
-          className="border border-gray-600"
-          onClick={deleteSpace}
-        >
-          Delete
         </button>
       </form>
     </div>
