@@ -6,7 +6,7 @@ import { HostHeader } from "../components/HostHeader";
 import { SpaceCard } from "../components/SpaceCard";
 
 export default function AppPage() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const firestore = getFirestore();
   const [userData, isUserLoading] = useDocumentData(
     doc(firestore, `users/${user?.uid}`)
@@ -18,13 +18,22 @@ export default function AppPage() {
     return <div className="max-w-md mx-auto">Loading...</div>;
 
   return (
-    <section className="text-gray-600 body-font">
+    <section className="text-gray-600 body-font font-grotesk">
       <HostHeader host={userData}>
-        <Link href="/app/spaces/new">
-          <a className="inline-flex items-center px-3 py-2 mt-8 text-base text-white rounded-full bg-twitterblue border-twitterblue focus:outline-none hover:bg-twitterblue_dark md:mt-0">
-            Upload a new space
-          </a>
-        </Link>
+        <div className="flex space-x-5">
+          <Link href="/app/spaces/new">
+            <a className="inline-flex items-center px-3 py-2 mt-8 text-base text-white rounded-lg bg-twitterblue border-twitterblue focus:outline-none hover:bg-twitterblue_dark md:mt-0">
+              Upload a new space
+            </a>
+          </Link>
+
+          <button
+            onClick={logout}
+            className="inline-flex items-center px-3 py-2 mt-8 text-base text-gray-800 rounded-lg border-2 border-twitterblue focus:outline-none hover:bg-gray-100 md:mt-0"
+          >
+            Logout
+          </button>
+        </div>
       </HostHeader>
 
       <div className="container items-center px-5 mx-auto">

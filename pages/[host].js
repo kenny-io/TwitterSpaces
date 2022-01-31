@@ -33,7 +33,7 @@ export default function HostPage(props) {
           href={`https://twitter.com/${hostUsername}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center px-3 py-2 mt-8 text-base text-white rounded-full bg-twitterblue border-twitterblue focus:outline-none hover:bg-twitterblue_dark md:mt-0"
+          className="inline-flex items-center py-2 mt-8 text-base rounded-lg text-twitterblue md:mt-0 font-grotesk"
         >
           Follow {host.name} on Twitter
         </a>
