@@ -16,6 +16,11 @@ service cloud.firestore {
       allow delete: if request.auth.uid == userId;
     }
 
+    // Required for collection group queries
+    match /{path=**}/spaces/{spaceId} {
+      allow read;
+    }
+
     // Spaces
     
     function canCreateSpace(userId) {
