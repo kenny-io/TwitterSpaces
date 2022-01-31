@@ -11,6 +11,7 @@ export default function AppPage() {
   const [userData, isUserLoading] = useDocumentData(
     doc(firestore, `users/${user?.uid}`)
   );
+  console.log(userData);
   const [spacesSnap, isSpacesLoading] = useCollection(
     collection(getFirestore(), `users/${user?.uid}/spaces`)
   );
@@ -27,12 +28,11 @@ export default function AppPage() {
             </a>
           </Link>
 
-          <button
-            onClick={logout}
-            className="inline-flex items-center px-3 py-2 mt-8 text-base text-gray-800 rounded-lg border-2 border-twitterblue focus:outline-none hover:bg-gray-100 md:mt-0"
-          >
-            Logout
-          </button>
+          <Link href={`/${userData.username}`}>
+            <a className="inline-flex items-center px-3 py-2 mt-8 text-base text-gray-800 rounded-lg border-2 border-twitterblue focus:outline-none hover:bg-gray-100 md:mt-0">
+              Preview
+            </a>
+          </Link>
         </div>
       </HostHeader>
 

@@ -49,12 +49,9 @@ export default function Home() {
                   key={spaceDoc.id}
                   href={`/spaces/${spaceDoc.id}`}
                   space={spaceDoc}
-                  children={
-                    <>
-                      <div>{truncate(spaceDoc.description, 100)}</div>
-                    </>
-                  }
-                ></SpaceCard>
+                >
+                  <div>{truncate(spaceDoc.description, 100)}</div>
+                </SpaceCard>
               );
             })}
           </div>
