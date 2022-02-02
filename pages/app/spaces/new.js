@@ -1,13 +1,11 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  serverTimestamp,
-} from "firebase/firestore";
+import { getFirestore, doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { customAlphabet } from "nanoid";
+import { alphanumeric } from "nanoid-dictionary";
 import { useAuth } from "../../../contexts/auth";
 import { Upload } from "../../../components/Upload";
+
+const createSpaceId = customAlphabet(alphanumeric, 12);
 
 export default function NewSpacePage() {
   const router = useRouter();
@@ -16,7 +14,9 @@ export default function NewSpacePage() {
   async function handleSubmit(e) {
     e.preventDefault();
     const firestore = getFirestore();
-    await addDoc(collection(firestore, `users/${user.uid}/spaces`), {
+    const newSpaceId = createSpaceId();
+    await setDoc(doc(firestore, `users/${user.uid}/spaces/${newSpaceId}`), {
+      id: newSpaceId,
       uid: user.uid,
       username: userData.username,
       title: e.currentTarget.title.value,
