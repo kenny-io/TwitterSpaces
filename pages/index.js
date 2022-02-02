@@ -9,8 +9,8 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import styles from "../styles/Home.module.css";
 import AppHero from "../components/AppHero";
+import { SpaceCard } from "../components/SpaceCard";
 
 export default function Home() {
   const [spaces] = useCollectionData(
@@ -21,8 +21,14 @@ export default function Home() {
     )
   );
 
+  // create a function to truncate the description
+
+  const truncate = (str, n) => {
+    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  };
+
   return (
-    <div className={styles.container}>
+    <div className="container items-center px-5 mx-auto mb-8">
       <Head>
         <title>TwitterSpaces</title>
         <meta
@@ -36,7 +42,19 @@ export default function Home() {
         <AppHero />
 
         {spaces ? (
-          <pre>{JSON.stringify(spaces, null, 2)}</pre>
+          <div className="flex flex-wrap -m-4">
+            {spaces.map((spaceDoc) => {
+              return (
+                <SpaceCard
+                  key={spaceDoc.id}
+                  href={`/spaces/${spaceDoc.id}`}
+                  space={spaceDoc}
+                >
+                  <div>{truncate(spaceDoc.description, 100)}</div>
+                </SpaceCard>
+              );
+            })}
+          </div>
         ) : (
           <p>Loading...</p>
         )}
