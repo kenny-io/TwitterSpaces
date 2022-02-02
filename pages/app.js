@@ -1,21 +1,16 @@
-import { getFirestore, collection, doc, deleteDoc } from "firebase/firestore";
+import { getFirestore, collection } from "firebase/firestore";
 import Link from "next/link";
-import { useCollection, useDocumentData } from "react-firebase-hooks/firestore";
+import { useCollection } from "react-firebase-hooks/firestore";
 import { useAuth } from "../contexts/auth";
 import { HostHeader } from "../components/HostHeader";
 import { SpaceCard } from "../components/SpaceCard";
 
 export default function AppPage() {
-  const { user, logout } = useAuth();
-  const firestore = getFirestore();
-  const [userData, isUserLoading] = useDocumentData(
-    doc(firestore, `users/${user?.uid}`)
-  );
-  console.log(userData);
+  const { user, userData } = useAuth();
   const [spacesSnap, isSpacesLoading] = useCollection(
     collection(getFirestore(), `users/${user?.uid}/spaces`)
   );
-  if (isUserLoading || isSpacesLoading || !userData)
+  if (!userData || isSpacesLoading || !userData)
     return <div className="max-w-md mx-auto">Loading...</div>;
 
   return (
@@ -29,7 +24,7 @@ export default function AppPage() {
           </Link>
 
           <Link href={`/${userData.username}`}>
-            <a className="inline-flex items-center px-3 py-2 mt-8 text-base text-gray-800 rounded-lg border-2 border-twitterblue focus:outline-none hover:bg-gray-100 md:mt-0">
+            <a className="inline-flex items-center px-3 py-2 mt-8 text-base text-gray-800 border-2 rounded-lg border-twitterblue focus:outline-none hover:bg-gray-100 md:mt-0">
               Preview
             </a>
           </Link>
@@ -40,7 +35,7 @@ export default function AppPage() {
         <h1 className="mb-6 text-3xl font-medium text-gray-900 title-font sm:text-4xl font-mulish">
           Your spaces
         </h1>
-        {/* <SpacesList spaces={spacesSnap.docs} deleteSpace={deleteSpace} />) */}
+
         {spacesSnap.docs.length > 0 ? (
           <div className="flex flex-wrap -m-4">
             {spacesSnap.docs.map((spaceDoc) => {

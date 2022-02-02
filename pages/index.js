@@ -1,31 +1,27 @@
 import Head from "next/head";
-import { useEffect } from "react";
 import {
   getFirestore,
   collectionGroup,
   query,
   orderBy,
   limit,
-  getDocs,
 } from "firebase/firestore";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useCollection } from "react-firebase-hooks/firestore";
 import AppHero from "../components/AppHero";
 import { SpaceCard } from "../components/SpaceCard";
 
+const truncate = (str, n) => {
+  return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+};
+
 export default function Home() {
-  const [spaces] = useCollectionData(
+  const [spacesSnap, isLoading] = useCollection(
     query(
       collectionGroup(getFirestore(), "spaces"),
       orderBy("createdAt", "desc"),
       limit(10)
     )
   );
-
-  // create a function to truncate the description
-
-  const truncate = (str, n) => {
-    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
-  };
 
   return (
     <div className="container items-center px-5 mx-auto mb-8">
@@ -41,22 +37,25 @@ export default function Home() {
       <main>
         <AppHero />
 
-        {spaces ? (
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : spacesSnap.docs.length === 0 ? (
+          <p>No spaces</p>
+        ) : (
           <div className="flex flex-wrap -m-4">
-            {spaces.map((spaceDoc) => {
+            {spacesSnap.docs.map((spaceDoc) => {
+              const space = spaceDoc.data();
               return (
                 <SpaceCard
                   key={spaceDoc.id}
-                  href={`/spaces/${spaceDoc.id}`}
-                  space={spaceDoc}
+                  href={`/${space.username}/${spaceDoc.id}`}
+                  space={space}
                 >
-                  <div>{truncate(spaceDoc.description, 100)}</div>
+                  <div>{truncate(space.description, 100)}</div>
                 </SpaceCard>
               );
             })}
           </div>
-        ) : (
-          <p>Loading...</p>
         )}
       </main>
     </div>

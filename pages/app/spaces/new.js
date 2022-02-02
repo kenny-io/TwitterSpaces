@@ -11,13 +11,14 @@ import { Upload } from "../../../components/Upload";
 
 export default function NewSpacePage() {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, userData } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
     const firestore = getFirestore();
     await addDoc(collection(firestore, `users/${user.uid}/spaces`), {
       uid: user.uid,
+      username: userData.username,
       title: e.currentTarget.title.value,
       description: e.currentTarget.description.value,
       assetId: e.currentTarget.assetId.value,
