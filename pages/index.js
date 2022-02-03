@@ -26,12 +26,12 @@ export default function Home() {
   return (
     <div className="container items-center px-5 mx-auto mb-8">
       <Head>
-        <title>TwitterSpaces</title>
+        <title>Home | Spaces</title>
         <meta
           name="description"
           content="List, manage, and organize your Twitter spaces conversations in one place"
         />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>

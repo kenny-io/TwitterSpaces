@@ -31,10 +31,6 @@ export function Upload() {
 
   useEffect(() => {
     if (upload && upload.asset_id) {
-      // Router.push({
-      //   pathname: `/asset/${upload.asset_id}`,
-      //   scroll: false,
-      // })
       console.log("done");
       console.log(upload);
     }

@@ -4,6 +4,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { useAuth } from "../contexts/auth";
 import { HostHeader } from "../components/HostHeader";
 import { SpaceCard } from "../components/SpaceCard";
+import Head from "next/head";
 
 export default function AppPage() {
   const { user, userData } = useAuth();
@@ -15,6 +16,14 @@ export default function AppPage() {
 
   return (
     <section className="text-gray-600 body-font font-grotesk">
+      <Head>
+        <title>Dashboard | {userData.username}</title>
+        <meta
+          name="description"
+          content="List, manage, and organize your Twitter spaces conversations in one place"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <HostHeader host={userData}>
         <div className="flex space-x-5">
           <Link href="/app/spaces/new">

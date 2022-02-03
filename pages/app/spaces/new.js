@@ -4,6 +4,7 @@ import { customAlphabet } from "nanoid";
 import { alphanumeric } from "nanoid-dictionary";
 import { useAuth } from "../../../contexts/auth";
 import { Upload } from "../../../components/Upload";
+import Head from "next/head";
 
 const createSpaceId = customAlphabet(alphanumeric, 12);
 
@@ -31,6 +32,14 @@ export default function NewSpacePage() {
 
   return (
     <section className="relative py-20 overflow-hidden bg-white 2xl:py-40">
+      <Head>
+        <title>Create new space</title>
+        <meta
+          name="description"
+          content="List, manage, and organize your Twitter spaces conversations in one place"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="container relative px-4 mx-auto">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-wrap items-center -mx-4">

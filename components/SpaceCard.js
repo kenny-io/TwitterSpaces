@@ -10,7 +10,7 @@ export function SpaceCard({ href, space, children }) {
         <a className="block p-6 border-2 border-zinc-300 rounded-xl">
           <img
             className="object-cover object-center w-full mb-6 rounded-xl"
-            src={space.banner || DEFAULT_BANNER}
+            src={space.image || DEFAULT_BANNER}
             alt="content"
           />
           <h2 className="mb-4 text-xl font-bold text-gray-900 font-mulish">

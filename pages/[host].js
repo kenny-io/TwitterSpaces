@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useFetchHost, useHost } from "../contexts/hosts";
 import { HostHeader } from "../components/HostHeader";
 import { SpaceCard } from "../components/SpaceCard";
+import Head from "next/head";
 
 export default function HostPage(props) {
   const router = useRouter();
@@ -23,6 +24,14 @@ export default function HostPage(props) {
 
   return (
     <>
+      <Head>
+        <title>{hostUsername} | Spaces</title>
+        <meta
+          name="description"
+          content="List, manage, and organize your Twitter spaces conversations in one place"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <HostHeader host={data.host}>
         <a
           href={`https://twitter.com/${hostUsername}`}

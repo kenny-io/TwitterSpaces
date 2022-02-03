@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import {
   getFirestore,
   doc,
@@ -9,7 +9,6 @@ import {
 } from "firebase/firestore";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuth } from "../../../contexts/auth";
-import { AudioPlayer } from "../../../components/AudioPlayer";
 import { Upload } from "../../../components/Upload";
 
 export default function AppSpacePage(props) {
@@ -53,6 +52,14 @@ export default function AppSpacePage(props) {
 
   return (
     <section className="relative py-10 overflow-hidden bg-white 2xl:py-20">
+      <Head>
+        <title>Edit your space</title>
+        <meta
+          name="description"
+          content="List, manage, and organize your Twitter spaces conversations in one place"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="container relative px-4 mx-auto">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-wrap items-center -mx-4">
@@ -114,45 +121,5 @@ export default function AppSpacePage(props) {
         </div>
       </div>
     </section>
-    // <div className="max-w-md mx-auto">
-    //   <Link href="/app">Back to app</Link>
-    //   <div>Space</div>
-
-    //   <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-    //     <label className="flex flex-col">
-    //       Title
-    //       <input
-    //         name="title"
-    //         type="text"
-    //         defaultValue={space.title}
-    //         className="px-2 py-0.5 border border-gray-600"
-    //       />
-    //     </label>
-    //     <label className="flex flex-col">
-    //       Description
-    //       <input
-    //         name="description"
-    //         type="text"
-    //         defaultValue={space.description}
-    //         className="px-2 py-0.5 border border-gray-600"
-    //       />
-    //     </label>
-
-    //     <AudioPlayer
-    //       src={`https://stream.mux.com/${space.playbackId}.m3u8?add_audio_only=true`}
-    //       poster={`https://image.mux.com/${space.playbackId}/thumbnail.png`}
-    //     />
-    //     <button type="submit" className="border border-gray-600">
-    //       Save
-    //     </button>
-    //     <button
-    //       type="button"
-    //       className="border border-gray-600"
-    //       onClick={deleteSpace}
-    //     >
-    //       Delete
-    //     </button>
-    //   </form>
-    // </div>
   );
 }

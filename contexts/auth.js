@@ -71,9 +71,3 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
-// accessToken: "1327289510-NS1B1L1D0Hpj25b24pNkxNEQiVAakBOqfgIOeno"
-// pendingToken: null
-// providerId: "twitter.com"
-// secret: "3sEA2ppiD91DvwWo9yb3VzESd9uPXjLJsDws2hosrcwy3"
-// signInMethod: "twitter.com"
