@@ -101,8 +101,9 @@ export default function AppSpacePage(props) {
                     Save Changes
                   </button>
                   <button
-                    type="submit"
-                    className="w-full py-4 font-bold text-gray-800 transition duration-200 border-2 border-twitterblue mt-3 rounded-lg hover:bg-red-700 hover:border-red-700 hover:text-white"
+                    type="button"
+                    className="w-full py-4 mt-3 font-bold text-gray-800 transition duration-200 border-2 rounded-lg border-twitterblue hover:bg-red-700 hover:border-red-700 hover:text-white"
+                    onClick={deleteSpace}
                   >
                     Delete
                   </button>

@@ -6,10 +6,13 @@ import {
   getRedirectResult,
   TwitterAuthProvider,
 } from "firebase/auth";
+import { getFirestore, doc } from "firebase/firestore";
+import { useDocumentData } from "react-firebase-hooks/firestore";
 import { app } from "../lib/firebase";
 
 export const AuthContext = createContext({
   user: null,
+  userData: null,
   login: () => {},
   logout: () => {},
 });
@@ -22,6 +25,9 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
   const auth = getAuth(app);
+  const firestore = getFirestore(app);
+
+  const [userData] = useDocumentData(doc(firestore, `users/${user?.uid}`));
 
   function login() {
     signInWithRedirect(auth, twitterProvider);
@@ -57,7 +63,7 @@ export function AuthProvider({ children }) {
   });
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, userData, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

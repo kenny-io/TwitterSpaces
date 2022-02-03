@@ -1,9 +1,6 @@
 import { useRouter } from "next/router";
-import {
-  useCollection,
-  useCollectionData,
-} from "react-firebase-hooks/firestore";
-import { getFirestore, query, collection, where } from "firebase/firestore";
+import { useEffect } from "react";
+import { useFetchHost, useHost } from "../contexts/hosts";
 import { HostHeader } from "../components/HostHeader";
 import { SpaceCard } from "../components/SpaceCard";
 
@@ -11,31 +8,29 @@ export default function HostPage(props) {
   const router = useRouter();
   const hostUsername = router.query.host;
 
-  const [hostQuerySnap, isLoading] = useCollection(
-    query(
-      collection(getFirestore(), "users"),
-      where("username", "==", hostUsername || "")
-    )
-  );
-  const hostDoc = hostQuerySnap?.docs?.[0];
-  const host = hostDoc?.data();
-  const [spacesSnap, isSpacesLoading] = useCollection(
-    collection(getFirestore(), `users/${hostDoc?.id}/spaces`)
-  );
+  const { status, error, data } = useHost(router.query.host);
+  const fetchHost = useFetchHost();
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!host) return <p>{router.query.host} is not a host</p>;
+  useEffect(() => {
+    if (data) return;
+    fetchHost(hostUsername);
+  }, [hostUsername, fetchHost, data]);
+
+  if (error) return <p>{error.message}</p>;
+  if (status === "done" && !data) return <p>No host</p>;
+  if (status === "loading") return <p>Loading...</p>;
+  if (!data) return <p>Loading...</p>;
 
   return (
     <>
-      <HostHeader host={host}>
+      <HostHeader host={data.host}>
         <a
           href={`https://twitter.com/${hostUsername}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center py-2 mt-8 text-base rounded-lg text-twitterblue md:mt-0 font-grotesk"
         >
-          Follow {host.name} on Twitter
+          Follow {data.host.name} on Twitter
         </a>
       </HostHeader>
 
@@ -43,16 +38,13 @@ export default function HostPage(props) {
         <h2 className="mb-6 text-3xl font-medium text-gray-900 title-font sm:text-4xl font-mulish">
           Spaces
         </h2>
-        {isSpacesLoading ? (
-          <p>Loading...</p>
-        ) : spacesSnap.docs.length > 0 ? (
+        {data.spaces.length > 0 ? (
           <div className="flex flex-wrap -m-4">
-            {spacesSnap.docs.map((spaceDoc) => {
-              const space = spaceDoc.data();
+            {data.spaces.map((space) => {
               return (
                 <SpaceCard
-                  key={spaceDoc.id}
-                  href={`/spaces/${spaceDoc.id}`}
+                  key={space.id}
+                  href={`/${hostUsername}/${space.id}`}
                   space={space}
                 ></SpaceCard>
               );
