@@ -18,8 +18,7 @@ export default function Home() {
   const [spacesSnap, isLoading] = useCollection(
     query(
       collectionGroup(getFirestore(), "spaces"),
-      orderBy("createdAt", "desc"),
-      limit(10)
+      orderBy("createdAt", "desc")
     )
   );
 
