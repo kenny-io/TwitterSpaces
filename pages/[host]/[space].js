@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useFetchHost, useHost } from "../../contexts/hosts";
 import { AudioPlayer } from "../../components/AudioPlayer";
+import Head from "next/head";
 
 const SPACE_BANNER =
   "https://res.cloudinary.com/kennyy/image/upload/v1642889007/c-d-x-PDX_a_82obo-unsplash_mwscen.jpg";
@@ -28,6 +29,14 @@ export default function SpacePage() {
 
   return (
     <section>
+      <Head>
+        <title>{space.title}</title>
+        <meta
+          name="description"
+          content="List, manage, and organize your Twitter spaces conversations in one place"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="container items-center px-5 mx-auto mt-24 mb-8">
         <span className="text-lg font-extrabold uppercase text-twitterblue_dark font-mulish">
           Spaces
@@ -45,9 +54,6 @@ export default function SpacePage() {
           />
         </div>
         <div className="flex flex-col items-center text-center lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 md:items-start md:text-left">
-          {/* <h1 className="mb-4 font-medium text-gray-800 title-font sm:text-4xl font-mulish">
-            {space.title}
-          </h1> */}
           <p className="mb-8 leading-relaxed font-grotesk ">
             {space.description}
           </p>
@@ -56,9 +62,6 @@ export default function SpacePage() {
             src={`https://stream.mux.com/${space.playbackId}.m3u8?add_audio_only=true`}
             poster={`https://image.mux.com/${space.playbackId}/thumbnail.png`}
           />
-          {/* <button className="inline-flex px-6 py-2 text-lg text-white border-0 rounded bg-twitterblue focus:outline-none hover:bg-twitterblue_dark font-grotesk">
-            Listen to this space
-          </button> */}
         </div>
       </div>
     </section>

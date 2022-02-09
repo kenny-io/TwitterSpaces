@@ -9,6 +9,7 @@ import {
 import { getFirestore, doc } from "firebase/firestore";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { app } from "../lib/firebase";
+import { useRouter } from "next/router";
 
 export const AuthContext = createContext({
   user: null,
@@ -23,7 +24,7 @@ const twitterProvider = new TwitterAuthProvider();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-
+  const router = useRouter();
   const auth = getAuth(app);
   const firestore = getFirestore(app);
 
@@ -31,10 +32,12 @@ export function AuthProvider({ children }) {
 
   function login() {
     signInWithRedirect(auth, twitterProvider);
+    router.push("/app");
   }
 
   async function logout() {
     await signOut(auth);
+    router.push("/");
   }
 
   useEffect(() => {
@@ -68,9 +71,3 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
-// accessToken: "1327289510-NS1B1L1D0Hpj25b24pNkxNEQiVAakBOqfgIOeno"
-// pendingToken: null
-// providerId: "twitter.com"
-// secret: "3sEA2ppiD91DvwWo9yb3VzESd9uPXjLJsDws2hosrcwy3"
-// signInMethod: "twitter.com"
