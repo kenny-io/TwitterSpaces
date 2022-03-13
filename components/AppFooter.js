@@ -1,4 +1,4 @@
-import Logo from "./NetlifyLogo";
+import NetlifyLogo from "./NetlifyLogo";
 
 export default function AppFooter() {
   const currentYear = new Date().getFullYear();
@@ -14,12 +14,14 @@ export default function AppFooter() {
               Our sponsors
             </h2>
             <p className="mb-8 ">Thank you for making this possible.</p>
-            <div>
+            <div className="py-4">
               <a
-                className="inline-block mb-4 sm:mb-0 sm:mr-4 py-4 px-8 transition duration-200"
+                className="inline-block mb-4 sm:mb-0 sm:mr-4 transition duration-200"
                 href="https://www.netlify.com"
+                target="_blank"
+                rel="noreferrer noopener"
               >
-                <Logo />
+                <NetlifyLogo />
               </a>
             </div>
           </div>
