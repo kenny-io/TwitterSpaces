@@ -1,12 +1,7 @@
 import { useState, useCallback } from "react";
 import { createContext, useContextSelector } from "use-context-selector";
-import {
-  getFirestore,
-  getDocs,
-  collection,
-  query,
-  where,
-} from "firebase/firestore";
+import { getHostDocByUsername } from "../utils/getHostDocByUsername";
+import { getSpacesValueByHostId } from "../utils/getSpacesValueByHostId";
 
 export const HostsContext = createContext(null);
 
@@ -22,21 +17,12 @@ export function HostsProvider({ children }) {
       if (!hostUsername) return;
       setHost(hostUsername, { status: "loading", error: null, data: null });
       try {
-        const hostQuerySnap = await getDocs(
-          query(
-            collection(getFirestore(), "users"),
-            where("username", "==", hostUsername)
-          )
-        );
-        if (hostQuerySnap.docs.length === 0) {
+        const hostDoc = await getHostDocByUsername(hostUsername);
+        if (!hostDoc) {
           setHost(hostUsername, { status: "done", error: null, data: null });
           return;
         }
-        const hostDoc = hostQuerySnap.docs[0];
-        const spacesSnap = await getDocs(
-          collection(getFirestore(), `users/${hostDoc.id}/spaces`)
-        );
-        const spaces = spacesSnap.docs.map((spaceDoc) => spaceDoc.data());
+        const spaces = await getSpacesValueByHostId(hostDoc.id);
         setHost(hostUsername, {
           status: "done",
           error: null,
