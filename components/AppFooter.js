@@ -1,4 +1,5 @@
 import NetlifyLogo from "./NetlifyLogo";
+import Link from "next/link";
 
 export default function AppFooter() {
   const currentYear = new Date().getFullYear();
@@ -93,9 +94,9 @@ export default function AppFooter() {
                     </a>
                   </li>
                   <li className="mb-6">
-                    <a className=" hover:text-gray-800" href="/faq">
-                      FAQs
-                    </a>
+                    <Link href="/faq">
+                      <a className=" hover:text-gray-800">FAQs</a>
+                    </Link>
                   </li>
                   <li className="mb-6">
                     <a
