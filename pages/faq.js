@@ -29,7 +29,7 @@ export default function FAQs() {
         </div>
         <div className="mb-4 px-4 lg:px-12 py-8 bg-white rounded-2xl mt-8 text-primary-content opacity-70">
           {faqs.map((faq) => (
-            <button className="flex w-full text-left">
+            <button key={faq.index} className="flex w-full text-left">
               <div className="w-auto mr-8">
                 <span className="flex items-center justify-center w-12 h-12 text-lg font-bold bg-blue-100 rounded-full">
                   {faq.index}
