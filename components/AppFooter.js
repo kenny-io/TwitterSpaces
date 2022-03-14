@@ -93,7 +93,7 @@ export default function AppFooter() {
                     </a>
                   </li>
                   <li className="mb-6">
-                    <a className=" hover:text-gray-800" href="#">
+                    <a className=" hover:text-gray-800" href="/faq">
                       FAQs
                     </a>
                   </li>

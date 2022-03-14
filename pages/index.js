@@ -61,10 +61,10 @@ export default function Home() {
               className="inline-flex w-full rounded border border-gray-300"
             >
               <input
-                ype="text"
+                type="text"
                 id="space-search"
                 name="keyword"
-                placeholder="Enter Twitter username..."
+                placeholder="Search by Twitter handle without (@)"
                 className="w-full bg-slate-100 bg-opacity-50  focus:border-twitterblue focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
               <button
