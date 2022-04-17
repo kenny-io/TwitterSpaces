@@ -1,11 +1,10 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useFetchHost, useHost } from "../../contexts/hosts";
 import { AudioPlayer } from "../../components/AudioPlayer";
-import Head from "next/head";
-
-const SPACE_BANNER =
-  "https://res.cloudinary.com/kennyy/image/upload/v1642889007/c-d-x-PDX_a_82obo-unsplash_mwscen.jpg";
+import { CloudinaryImage } from "../../components/CloudinaryImage";
+import { getImage, getVideo } from "../../lib/cloudinary";
 
 export default function SpacePage() {
   const router = useRouter();
@@ -47,11 +46,7 @@ export default function SpacePage() {
       </div>
       <div className="container flex flex-col items-center px-5 mx-auto md:flex-row">
         <div className="w-5/6 mb-10 lg:max-w-lg lg:w-full md:w-1/2 md:mb-0">
-          <img
-            className="object-cover object-center rounded"
-            alt="hero"
-            src={SPACE_BANNER}
-          />
+          <CloudinaryImage img={getImage(space.heroId)} alt="hero" />
         </div>
         <div className="flex flex-col items-center text-center lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 md:items-start md:text-left">
           <p className="mb-8 leading-relaxed font-grotesk ">
@@ -59,8 +54,10 @@ export default function SpacePage() {
           </p>
 
           <AudioPlayer
-            src={`https://stream.mux.com/${space.playbackId}.m3u8?add_audio_only=true`}
-            poster={`https://image.mux.com/${space.playbackId}/thumbnail.png`}
+            id="player"
+            video={getVideo(space.audioId)}
+            // src={`https://stream.mux.com/${space.playbackId}.m3u8?add_audio_only=true`}
+            // poster={`https://image.mux.com/${space.playbackId}/thumbnail.png`}
           />
         </div>
       </div>

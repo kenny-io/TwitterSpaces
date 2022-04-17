@@ -1,29 +1,36 @@
+import { useMemo } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { getFirestore, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { customAlphabet } from "nanoid";
 import { alphanumeric } from "nanoid-dictionary";
 import { useAuth } from "../../../contexts/auth";
-import { Upload } from "../../../components/Upload";
-import Head from "next/head";
+import { ImageUpload } from "../../../components/ImageUpload";
+import { VideoUpload } from "../../../components/VideoUpload";
+import { DEFAULT_SPACE_HERO_ID } from "../../../utils/constants";
 
 const createSpaceId = customAlphabet(alphanumeric, 12);
 
 export default function NewSpacePage() {
   const router = useRouter();
   const { user, userData } = useAuth();
+  const newSpaceId = useMemo(() => createSpaceId(), []);
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!e.currentTarget.title.value) return;
+    if (!e.currentTarget.audioId.value) return;
+
     const firestore = getFirestore();
-    const newSpaceId = createSpaceId();
     await setDoc(doc(firestore, `users/${user.uid}/spaces/${newSpaceId}`), {
       id: newSpaceId,
       uid: user.uid,
       username: userData.username,
       title: e.currentTarget.title.value,
       description: e.currentTarget.description.value,
-      assetId: e.currentTarget.assetId.value,
-      playbackId: e.currentTarget.playbackId.value,
+      heroId: e.currentTarget.heroId?.value || DEFAULT_SPACE_HERO_ID,
+      audioId: e.currentTarget.audioId.value,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     });
@@ -79,17 +86,20 @@ export default function NewSpacePage() {
                       placeholder="Describe your space"
                     />
                   </div>
-                  <div className="flex items-center pl-6 mb-3 bg-white rounded-lg">
-                    <span className="inline-block py-2 pr-3 "></span>
-                    <input
-                      className="w-full py-4 pl-4 pr-6 placeholder-gray-400 font-semi-bold focus:outline-none"
-                      type="text"
-                      name="image"
-                      placeholder="Image URL for your poster"
-                    />
-                  </div>
 
-                  <Upload />
+                  <ImageUpload
+                    userId={userData?.twitterUserId}
+                    spaceId={newSpaceId}
+                  />
+
+                  <div className="mt-3" />
+
+                  <VideoUpload
+                    userId={userData?.twitterUserId}
+                    spaceId={newSpaceId}
+                  />
+
+                  <div className="mt-6" />
 
                   <button
                     type="submit"
