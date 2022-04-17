@@ -33,6 +33,7 @@ export default async function handler(req, res) {
     url: twitterUser.url,
     location: twitterUser.location,
     avatar: getAvatar(twitterUser.profile_image_url),
+    twitterUserId: twitterUserId,
   };
   await firestore.runTransaction(async (transaction) => {
     transaction.set(userRef, {

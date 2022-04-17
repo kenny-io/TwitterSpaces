@@ -9,7 +9,6 @@ import {
 } from "firebase/firestore";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuth } from "../../../contexts/auth";
-import { Upload } from "../../../components/Upload";
 
 export default function AppSpacePage(props) {
   const router = useRouter();
@@ -98,8 +97,6 @@ export default function AppSpacePage(props) {
                       }
                     />
                   </div>
-
-                  <Upload />
 
                   <button
                     type="submit"
