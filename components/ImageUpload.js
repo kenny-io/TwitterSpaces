@@ -1,24 +1,38 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import { createRandomId, createHeroId } from "../utils/id.helpers";
 
 export function ImageUpload({ userId, spaceId }) {
   const [isHeroUploaded, setIsHeroUploaded] = useState(false);
 
+  const createSignature = async () => {
+    const response = await fetch(`/api/sign`);
+    const result = await response.json();
+    console.log(result.result);
+    return result.result;
+  };
+
   const randomId = useMemo(() => createRandomId(), []);
 
-  function handleWidgetClick() {
+  async function handleWidgetClick() {
+    const signedSignature = await createSignature();
     const widget = window.cloudinary.createUploadWidget(
       {
         cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
         uploadPreset: process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET,
-        sources: ["local", "url"],
-        multiple: false,
+        uploadSignature: signedSignature,
+        apiKey: "586696823181723",
+        folder: "twitter-spaces-prod-signed",
         publicId: createHeroId(userId, spaceId, randomId),
-        resourceType: "image",
+        // sources: ["local", "url"],
+        // multiple: false,
+        // resourceType: "image",
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
+          console.log("Done! Here is the image info: ", result.info);
           setIsHeroUploaded(true);
+        } else if (error) {
+          console.log(error);
         }
       }
     );

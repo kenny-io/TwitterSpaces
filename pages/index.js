@@ -40,6 +40,8 @@ export default function Home() {
     ? hostData?.spaces || []
     : spacesSnap?.docs?.map((doc) => doc.data()) || [];
 
+  if (spaces) console.log(spaces);
+
   const isLoading = keyword ? status === "loading" : spacesIsLoading;
 
   return (
@@ -105,6 +107,7 @@ export default function Home() {
                   key={space.id}
                   href={`/${space.username}/${space.id}`}
                   space={space}
+                  image={space.heroId}
                 >
                   <div>{truncate(space.description, 100)}</div>
                 </SpaceCard>
