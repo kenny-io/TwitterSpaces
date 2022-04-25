@@ -1,7 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 
 export default async function handler(req, res) {
-  const apiSecret = "_3gp5UJt0Y_htrIqY_u3QDN2tdg";
+  const apiSecret = "API SECRET HERE";
 
   try {
     const result = cloudinary.utils.api_sign_request(

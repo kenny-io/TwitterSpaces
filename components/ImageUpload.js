@@ -20,7 +20,7 @@ export function ImageUpload({ userId, spaceId }) {
         cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
         uploadPreset: process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET,
         uploadSignature: signedSignature,
-        apiKey: "586696823181723",
+        apiKey: "API KEY HERE",
         folder: "twitter-spaces-prod-signed",
         publicId: createHeroId(userId, spaceId, randomId),
         // sources: ["local", "url"],
