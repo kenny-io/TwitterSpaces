@@ -4,17 +4,6 @@ import { generateSignature } from "../utils/generateSignature";
 export function ImageUpload({ userId, spaceId }) {
   const [isHeroUploaded, setIsHeroUploaded] = useState(false);
 
-  // function generateSignature( callback, paramsToSign ) {
-  //   fetch(`/api/sign`, {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       paramsToSign
-  //     })
-  //   }).then(r => r.json()).then(({ signature }) => {
-  //     callback(signature)
-  //   });
-  // }
-
   const randomId = useMemo(() => createRandomId(), []);
 
   async function handleWidgetClick() {
@@ -22,13 +11,10 @@ export function ImageUpload({ userId, spaceId }) {
       {
         cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
         uploadPreset: process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET,
-        uploadSignature: generateSignature,
         apiKey: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-        folder: "twitter-spaces-prod-signed",
+        uploadSignature: generateSignature,
+        folder: "twitter-spaces-content",
         publicId: createHeroId(userId, spaceId, randomId),
-        // sources: ["local", "url"],
-        // multiple: false,
-        // resourceType: "image",
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
