@@ -1,19 +1,19 @@
 import { useMemo, useState, useEffect, useRef } from "react";
 import { createRandomId, createHeroId } from "../utils/id.helpers";
-
+import { generateSignature } from "../utils/generateSignature";
 export function ImageUpload({ userId, spaceId }) {
   const [isHeroUploaded, setIsHeroUploaded] = useState(false);
 
-  function generateSignature( callback, paramsToSign ) {
-    fetch(`/api/sign`, {
-      method: 'POST',
-      body: JSON.stringify({
-        paramsToSign
-      })
-    }).then(r => r.json()).then(({ signature }) => {
-      callback(signature)
-    });
-  }
+  // function generateSignature( callback, paramsToSign ) {
+  //   fetch(`/api/sign`, {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       paramsToSign
+  //     })
+  //   }).then(r => r.json()).then(({ signature }) => {
+  //     callback(signature)
+  //   });
+  // }
 
   const randomId = useMemo(() => createRandomId(), []);
 
