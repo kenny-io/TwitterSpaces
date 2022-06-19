@@ -94,7 +94,6 @@ export default function Home() {
             </form>
           }
         />
-
         {isLoading ? (
           <p>Loading...</p>
         ) : spaces.length === 0 ? (
@@ -107,7 +106,6 @@ export default function Home() {
                   key={space.id}
                   href={`/${space.username}/${space.id}`}
                   space={space}
-                  image={space.heroId}
                 >
                   <div>{truncate(space.description, 100)}</div>
                 </SpaceCard>

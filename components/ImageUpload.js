@@ -15,6 +15,7 @@ export function ImageUpload({ userId, spaceId }) {
         uploadSignature: generateSignature,
         folder: "twitter-spaces-content",
         publicId: createHeroId(userId, spaceId, randomId),
+        resourceType: "image",
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
