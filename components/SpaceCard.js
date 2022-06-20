@@ -21,20 +21,5 @@ export function SpaceCard({ href, space, children }) {
         </a>
       </Link>
     </div>
-    // <div class="max-w-sm rounded overflow-hidden m-4 shadow-sm">
-    //   <CloudinaryImage
-    //     img={getImage(space.heroId)}
-    //     alt="content"
-    //     className="mb-6 rounded-xl w-full aspect-[3/2]"
-    //   />
-    //   <div class="px-6 py-4">
-    //     <div class="font-bold text-xl mb-2"> {space.title} </div>
-    //     <p class="text-gray-700 text-base">
-    //       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
-    //       quia, nulla! Maiores et perferendis eaque, exercitationem praesentium
-    //       nihil.
-    //     </p>
-    //   </div>
-    // </div>
   );
 }
