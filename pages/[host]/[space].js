@@ -5,7 +5,7 @@ import { useFetchHost, useHost } from "../../contexts/hosts";
 import { AudioPlayer } from "../../components/AudioPlayer";
 import { CloudinaryImage } from "../../components/CloudinaryImage";
 import { getImage, getVideo } from "../../lib/cloudinary";
-
+import Link from "next/link";
 export default function SpacePage() {
   const router = useRouter();
   const hostUsername = router.query.host;
@@ -27,7 +27,7 @@ export default function SpacePage() {
   if (!space) return <p>No space</p>;
 
   return (
-    <section>
+    <section className="mb-16">
       <Head>
         <title>{space.title}</title>
         <meta
@@ -37,7 +37,23 @@ export default function SpacePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container items-center px-5 mx-auto mt-24 mb-8">
-        <span className="text-lg font-extrabold uppercase text-twitterblue_dark font-mulish">
+        <Link href={"/" + hostUsername}>
+          <a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+              />
+            </svg>
+          </a>
+        </Link>
+        <span className="mt-8 text-lg font-extrabold uppercase text-twitterblue_dark font-mulish">
           Spaces
         </span>
         <h2 className="mt-3 text-4xl font-bold text-gray-800 font-heading font-mulish">
@@ -52,13 +68,7 @@ export default function SpacePage() {
           <p className="mb-8 leading-relaxed font-grotesk ">
             {space.description}
           </p>
-
-          <AudioPlayer
-            id="player"
-            video={getVideo(space.audioId)}
-            // src={`https://stream.mux.com/${space.playbackId}.m3u8?add_audio_only=true`}
-            // poster={`https://image.mux.com/${space.playbackId}/thumbnail.png`}
-          />
+          <AudioPlayer id="player" video={getVideo(space.audioId)} />
         </div>
       </div>
     </section>

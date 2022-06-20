@@ -40,21 +40,6 @@ export default function FAQs() {
                   <h3 className="text-xl font-bold font-mulish">
                     {faq.question}
                   </h3>
-                  <span className="ml-4">
-                    <svg
-                      className="w-4 h-4"
-                      width="18"
-                      height="10"
-                      viewbox="0 0 18 10"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M1.18267 9.00018C0.910673 9.26818 0.473672 9.26818 0.203672 9.00018C-0.0663284 8.73218 -0.0673279 8.29918 0.203672 8.03118L8.11167 0.201183C8.38167 -0.0668173 8.81867 -0.0668173 9.09067 0.201183L16.9987 8.03118C17.2687 8.29918 17.2687 8.73218 16.9987 9.00018C16.7277 9.26818 16.2897 9.26818 16.0197 9.00018L8.60067 1.85918L1.18267 9.00018Z"
-                        fill="#1F40FF"
-                      ></path>
-                    </svg>
-                  </span>
                 </div>
                 <div className="mt-6 border-l-2 border-gray-50 pl-10 font-grotesk">
                   <p className="mb-5 text-xl">{faq.answer}</p>
