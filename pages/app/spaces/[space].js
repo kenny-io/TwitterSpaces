@@ -9,10 +9,11 @@ import {
 } from "firebase/firestore";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuth } from "../../../contexts/auth";
-
+import { ImageUpload } from "../../../components/ImageUpload";
+import Link from "next/link";
 export default function AppSpacePage(props) {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, userData } = useAuth();
   const [spaceDoc] = useDocument(
     doc(getFirestore(), `users/${user?.uid}/spaces/${router.query.space}`)
   );
@@ -26,7 +27,6 @@ export default function AppSpacePage(props) {
   }
 
   const space = spaceDoc.data();
-
   function handleSubmit(e) {
     e.preventDefault();
     const firestore = getFirestore();
@@ -38,6 +38,7 @@ export default function AppSpacePage(props) {
         updatedAt: serverTimestamp(),
       }
     );
+    router.push("/app");
   }
 
   async function deleteSpace(id) {
@@ -60,7 +61,23 @@ export default function AppSpacePage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container relative px-4 mx-auto">
-        <div className="max-w-5xl mx-auto">
+        <Link href="/app">
+          <a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+              />
+            </svg>
+          </a>
+        </Link>
+        <div className="max-w-5xl mx-auto mt-8">
           <div className="flex flex-wrap items-center -mx-4">
             <div className="w-full px-4 ">
               <div className="px-6 py-12 rounded-lg lg:px-20 lg:py-24 bg-twitterblue_light">
@@ -86,17 +103,11 @@ export default function AppSpacePage(props) {
                       defaultValue={space.description}
                     />
                   </div>
-                  <div className="flex items-center pl-6 mb-3 bg-white rounded-lg">
-                    <span className="inline-block py-2 pr-3 "></span>
-                    <input
-                      className="w-full py-4 pl-4 pr-6 placeholder-gray-400 font-semi-bold focus:outline-none"
-                      type="text"
-                      name="image"
-                      defaultValue={
-                        space.image || "https://www.yourpaceimageurl.com"
-                      }
-                    />
-                  </div>
+
+                  {/* <ImageUpload
+                    userId={userData?.twitterUserId}
+                    spaceId={newSpaceId}
+                  /> */}
 
                   <button
                     type="submit"

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { createRandomId, createAudioId } from "../utils/id.helpers";
-
+import { generateSignature } from "../utils/generateSignature";
 export function VideoUpload({ userId, spaceId }) {
   const [isAudioUploaded, setIsAudioUploaded] = useState(false);
 
@@ -11,7 +11,8 @@ export function VideoUpload({ userId, spaceId }) {
       {
         cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
         uploadPreset: process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET,
-        sources: ["local", "url"],
+        apiKey: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
+        uploadSignature: generateSignature,
         multiple: false,
         publicId: createAudioId(userId, spaceId, randomId),
         resourceType: "video",

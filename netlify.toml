@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/app/spaces"
+  to = "/app"
+  status = 301

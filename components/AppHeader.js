@@ -6,7 +6,7 @@ export default function AppHeader({ location }) {
 
   return (
     <header className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
-      <div className="text-xl font-squid">
+      <div className="text-3xl font-squid">
         <h3>
           <Link href="/">
             <a>
@@ -15,7 +15,15 @@ export default function AppHeader({ location }) {
           </Link>
         </h3>
       </div>
-      <div>
+      <div className="px-4">
+        <Link href="/faq">
+          <a
+            className="inline-flex underline m-4
+          rounded-lg py-1 px-3 focus:outline-none hover:bg-gray-100 text-base mt-4 md:mt-0"
+          >
+            FAQ
+          </a>
+        </Link>
         {user && location === "/app" ? (
           <Button title="Logout" click={logout} />
         ) : location !== "/app" && user ? (
@@ -28,7 +36,7 @@ export default function AppHeader({ location }) {
             </a>
           </Link>
         ) : (
-          <Button title="Upload your recording" click={login} />
+          <Button title="Upload a recording" click={login} />
         )}
       </div>
     </header>
